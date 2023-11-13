@@ -1,0 +1,39 @@
+/* src/components/Home.css */
+.home-container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tool-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tool-list-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: calc(
+        33.333% - 10px
+    ); /* Calculate width for three items in a row with margin */
+    transition: transform 0.3s ease;
+}
+
+.tool-list-item:hover {
+    transform: scale(1.05);
+}
+
+.card-link {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.card-link:hover {
+    background-color: #f4f4f4;
+}

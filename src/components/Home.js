@@ -1,17 +1,23 @@
 // src/components/Home.js
 import React from 'react'
 import { Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './Home.css'
 
 const Home = () => {
     return (
-        <div>
+        <div className="home-container">
             <h1>Welcome to Tools and Utilities App</h1>
             <p>Explore various tools and utilities below:</p>
             <nav>
-                <ul>
-                    <li>
-                        <Link to="/PasswordGenerator">PasswordGenerator</Link>
+                <ul className="tool-list">
+                    <li className="tool-list-item">
+                        <Link to="/PasswordGenerator" className="card-link">
+                            <h3>Password Generator</h3>
+                            <p>Generate strong and secure passwords</p>
+                        </Link>
                     </li>
+                    {/* Add more tools as needed */}
                 </ul>
             </nav>
         </div>
