@@ -17,6 +17,12 @@ const Home = () => {
                             <p>Generate strong and secure passwords</p>
                         </Link>
                     </li>
+                    <li className="tool-list-item">
+                        <Link to="/WhosThatPokemon" className="card-link">
+                            <h3>WhosThatPokemon</h3>
+                            <p>WhosThatPokemon</p>
+                        </Link>
+                    </li>
                     {/* Add more tools as needed */}
                 </ul>
             </nav>

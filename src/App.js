@@ -6,6 +6,7 @@ import './App.css'
 import Home from './components/Home'
 import TopNavigationBar from './components/TopNavigationBar'
 import PasswordGenerator from './components/Tools/PasswordGenerator/PasswordGenerator'
+import WhosThatPokemon from './components/Tools/WhosThatPokemon/WhosThatPokemon'
 import LoginPage from './components/LoginPage'
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
                     <Route
                         path="/PasswordGenerator"
                         element={<PasswordGenerator />}
+                    />
+                    <Route
+                        path="/WhosThatPokemon"
+                        element={<WhosThatPokemon />}
                     />
                     {/* Add routes for other tools here */}
                 </Routes>
