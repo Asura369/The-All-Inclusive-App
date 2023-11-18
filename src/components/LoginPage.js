@@ -8,22 +8,6 @@ const LoginPage = ({ setUser }) => {
     const [password, setPassword] = useState('')
     console.log('User: ', user)
 
-    // Callback function to handle the response after the user signs in with google
-    function handleCallbackResponse(response) {
-        console.log('Encoded JWT ID Token: ', response.credential)
-
-        // Decode the JWT token to extract user information
-        const userObject = jwtDecode(response.credential)
-        console.log('Decoded JWT Token:', userObject)
-
-        // Set the user information in the component state
-        setLocalUser(userObject)
-        setUser(userObject)
-
-        // Hide the sign-in button
-        document.getElementById('googleSignInDiv').hidden = true
-    }
-
     // Callback function to handle user sign-out
     function handleSignOut(event) {
         // Clear user information from the component state
@@ -37,6 +21,21 @@ const LoginPage = ({ setUser }) => {
     // useEffect hook to initialize Google Sign-In
     useEffect(() => {
         /* global google */
+        // Callback function to handle the response after the user signs in with google
+        function handleCallbackResponse(response) {
+            console.log('Encoded JWT ID Token: ', response.credential)
+
+            // Decode the JWT token to extract user information
+            const userObject = jwtDecode(response.credential)
+            console.log('Decoded JWT Token:', userObject)
+
+            // Set the user information in the component state
+            setLocalUser(userObject)
+            setUser(userObject)
+
+            // Hide the sign-in button
+            document.getElementById('googleSignInDiv').hidden = true
+        }
 
         // Initialize Google Sign-In with the client ID
         google.accounts.id.initialize({
@@ -56,7 +55,7 @@ const LoginPage = ({ setUser }) => {
 
         // Prompt the user to sign in with a previous account at start
         // google.accounts.id.prompt();
-    }, [])
+    }, [setUser])
 
     // Handle form submission for regular login
     const handleRegularLogin = (e) => {
