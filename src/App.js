@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Home from './components/Home'
 import TopNavigationBar from './components/TopNavigationBar'
-import PasswordGenerator from './components/Tools/PasswordGenerator'
+import PasswordGenerator from './components/Tools/PasswordGenerator/PasswordGenerator'
 import LoginPage from './components/LoginPage'
 
 function App() {

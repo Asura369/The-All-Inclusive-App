@@ -1,4 +1,4 @@
-// src/components/Tools/PasswordGenerator.js
+// src/components/Tools/PasswordGenerator/PasswordGenerator.js
 import React, { useState } from 'react'
 import './PasswordGenerator.css' // Import the CSS file for styling
 
