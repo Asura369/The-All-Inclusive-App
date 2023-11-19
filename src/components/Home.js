@@ -19,8 +19,11 @@ const Home = () => {
                     </li>
                     <li className="tool-list-item">
                         <Link to="/WhosThatPokemon" className="card-link">
-                            <h3>WhosThatPokemon</h3>
-                            <p>WhosThatPokemon</p>
+                            <h3>Whos That Pokemon</h3>
+                            <p>
+                                Whos That Pokemon Game + List of Pokemon from
+                                each generation
+                            </p>
                         </Link>
                     </li>
                     {/* Add more tools as needed */}

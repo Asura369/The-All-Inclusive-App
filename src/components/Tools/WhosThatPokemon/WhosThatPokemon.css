@@ -1,10 +1,32 @@
 /* src/components/Tools/WhosThatPokemon/WhosThatPokemon.css */
+.whos-that-pokemon-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 10px;
+}
+
+.pokemon-table {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
 
 .pokemon-item {
-    list-style: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    width: calc(10%); /* Calculate width for ten items in a row */
 }
 
 .pokemon-image {
@@ -15,4 +37,45 @@
 
 .pokemon-name {
     text-transform: capitalize;
+}
+
+.pokemon-id {
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .pokemon-item {
+        width: calc(20%); /* Adjusted width for five items in a row */
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-item {
+        width: calc(33.333%); /* Adjusted width for three items in a row */
+    }
+}
+
+.generation-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.generation-buttons button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.generation-buttons button.active {
+    background-color: #d3460a;
 }
