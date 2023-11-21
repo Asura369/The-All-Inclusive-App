@@ -27,6 +27,18 @@
     transform: scale(1.05);
 }
 
+@media (max-width: 900px) {
+    .tool-list-item {
+        width: calc(50% - 10px); /* Adjusted width for two items in a row */
+    }
+}
+
+@media (max-width: 480px) {
+    .tool-list-item {
+        width: calc(100% - 10px); /* Adjusted width for one items in a row */
+    }
+}
+
 .card-link {
     display: block;
     padding: 15px;
