@@ -4,6 +4,10 @@
     padding: 20px;
 }
 
+.home-container p {
+    margin: 10px;
+}
+
 .tool-list {
     list-style: none;
     padding: 0;
