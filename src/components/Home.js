@@ -18,12 +18,15 @@ const Home = () => {
                         </Link>
                     </li>
                     <li className="tool-list-item">
+                        <Link to="/PokemonWiki" className="card-link">
+                            <h3>Pokemon Wiki</h3>
+                            <p>See Pokemon from each Generation</p>
+                        </Link>
+                    </li>
+                    <li className="tool-list-item">
                         <Link to="/WhosThatPokemon" className="card-link">
                             <h3>Whos That Pokemon</h3>
-                            <p>
-                                Whos That Pokemon Game + List of Pokemon from
-                                each generation
-                            </p>
+                            <p>Whos That Pokemon Game</p>
                         </Link>
                     </li>
                     {/* Add more tools as needed */}

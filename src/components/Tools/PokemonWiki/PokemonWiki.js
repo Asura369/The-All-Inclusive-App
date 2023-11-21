@@ -1,9 +1,9 @@
-// src/components/Tools/WhosThatPokemon/WhosThatPokemon.js
+// src/components/Tools/PokemonWiki/PokemonWiki.js
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './WhosThatPokemon.css'
+import './PokemonWiki.css'
 
-const WhosThatPokemon = () => {
+const PokemonWiki = () => {
     const [pokemonList, setPokemonList] = useState([])
     const [activeGeneration, setActiveGeneration] = useState()
 
@@ -42,10 +42,10 @@ const WhosThatPokemon = () => {
     }
 
     return (
-        <div className="whos-that-pokemon-container">
-            <h1>Whos That Pokemon</h1>
-            <Link to="/PokemonWiki" className="go-to-game">
-                See Pokemon List
+        <div className="pokemon-list-container">
+            <h1>Pokemon List</h1>
+            <Link to="/WhosThatPokemon" className="go-to-game">
+                Play Whos That Pokemon Game
             </Link>
             <div className="generation-buttons">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((generation) => (
@@ -81,4 +81,4 @@ const WhosThatPokemon = () => {
     )
 }
 
-export default WhosThatPokemon
+export default PokemonWiki
