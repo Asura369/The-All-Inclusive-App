@@ -7,8 +7,8 @@ import './Home.css'
 const Home = () => {
     return (
         <div className="home-container">
-            <h1>Welcome to Tools and Utilities App</h1>
-            <p>Explore various tools and utilities below:</p>
+            <h1>Welcome to The All Inclusive App</h1>
+            <p>Explore various apps below:</p>
             <nav>
                 <ul className="tool-list">
                     <li className="tool-list-item">

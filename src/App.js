@@ -6,8 +6,8 @@ import './App.css'
 import Home from './components/Home'
 import TopNavigationBar from './components/TopNavigationBar'
 import PasswordGenerator from './components/Tools/PasswordGenerator/PasswordGenerator'
-import PokemonWiki from './components/Tools/PokemonWiki/PokemonWiki'
-import WhosThatPokemon from './components/Tools/WhosThatPokemon/WhosThatPokemon'
+import PokemonWiki from './components/Tools/Pokemon/PokemonWiki'
+import WhosThatPokemon from './components/Tools/Pokemon/WhosThatPokemon'
 import LoginPage from './components/LoginPage'
 
 function App() {

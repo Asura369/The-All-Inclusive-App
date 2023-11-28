@@ -7,7 +7,7 @@ import './TopNavigationBar.css'
 const TopNavigationBar = ({ user }) => {
     return (
         <Navbar bg="primary" variant="light" className="top-navigation-bar">
-            <Navbar.Brand href="/">Tools & Utilities</Navbar.Brand>
+            {/* <Navbar.Brand href="/">The All Inclusive App</Navbar.Brand> */}
             <Nav className="mr-auto">
                 <Nav.Link as={Link} to="/">
                     Home

@@ -1,5 +1,5 @@
-/* src/components/Tools/WhosThatPokemon/WhosThatPokemon.css */
-.whos-that-pokemon-container {
+/* src/components/Tools/Pokemon/Pokemon.css */
+.pokemon-list-container {
     margin: 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -7,7 +7,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.whos-that-pokemon-container h1 {
+.pokemon-list-container h1 {
     margin: 10px;
 }
 
@@ -101,4 +101,26 @@
 
 .go-to-game:hover {
     background-color: #d3460a;
+}
+
+.whos-that-pokemon-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.whos-that-pokemon-container h1 {
+    margin: 10px;
+}
+
+.whos-that-pokemon-container h5 {
+    margin: 10px;
+}
+
+.background-image {
+    width: 50%; /* Adjust the size as needed */
+    height: 50%; /* Adjust the size as needed */
+    margin: 10px;
 }
