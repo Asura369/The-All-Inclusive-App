@@ -26,7 +26,8 @@
     text-align: center;
     padding: 15px;
     border: 1px solid #ddd;
-    width: calc(10%); /* Calculate width for ten items in a row */
+    height: 160px;
+    width: 112px;
 }
 
 .pokemon-image {
@@ -41,18 +42,6 @@
 
 .pokemon-id {
     font-weight: bold;
-}
-
-@media (max-width: 900px) {
-    .pokemon-item {
-        width: calc(20%); /* Adjusted width for five items in a row */
-    }
-}
-
-@media (max-width: 480px) {
-    .pokemon-item {
-        width: calc(33.333%); /* Adjusted width for three items in a row */
-    }
 }
 
 .generation-buttons {
