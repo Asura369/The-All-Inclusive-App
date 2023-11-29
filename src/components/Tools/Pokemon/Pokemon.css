@@ -114,6 +114,17 @@
     width: 50%; /* Adjust the size as needed */
     height: 50%; /* Adjust the size as needed */
     margin: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.mystery-pokemon-image {
+    width: 18%; /* Adjust the size as needed */
+    height: 18%; /* Adjust the size as needed */
+    z-index: 2;
+    position: relative;
+    left: -46%;
+    filter: brightness(0.0001);
 }
 
 .pagination {

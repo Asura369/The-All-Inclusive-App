@@ -47,6 +47,12 @@ const WhosThatPokemon = () => {
         return pokemon_id
     }
 
+    const generateRandomPokemon = () => {
+        const randomIndex = Math.floor(Math.random() * pokemonList.length)
+        const randomPokemon = pokemonList[randomIndex]
+        return getPokemonIdFromUrl(randomPokemon.url)
+    }
+
     return (
         <div className="whos-that-pokemon-container">
             <h1>Whos That Pokemon</h1>
@@ -81,12 +87,26 @@ const WhosThatPokemon = () => {
             )}
 
             {activeGeneration >= 1 && activeGeneration <= 8 ? (
-                <div>
-                    <img
-                        src={BackgroundImage}
-                        alt="Background"
-                        className="background-image"
-                    />
+                <div className="whos-that-pokemon-container">
+                    <div>
+                        <img
+                            src={BackgroundImage}
+                            alt="Background"
+                            className="background-image"
+                        />
+                        <img
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${generateRandomPokemon()}.png`}
+                            alt="mystery-pokemon"
+                            className="mystery-pokemon-image"
+                        />
+                    </div>
+
+                    <div>
+                        <button className="go-to-game">Choice 1</button>
+                        <button className="go-to-game">Choice 2</button>
+                        <button className="go-to-game">Choice 3</button>
+                        <button className="go-to-game">Choice 4</button>
+                    </div>
                 </div>
             ) : null}
         </div>
