@@ -1,14 +1,14 @@
 /* src/components/Tools/Pokemon/Pokemon.css */
 .pokemon-list-container {
     margin: 20px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .pokemon-list-container h1 {
-    margin: 10px;
+    margin-left: 10px;
 }
 
 .pokemon-table {
@@ -47,8 +47,8 @@
 .generation-buttons {
     display: flex;
     gap: 10px;
-    margin: 10px;
-    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
 }
 
@@ -75,7 +75,8 @@
 }
 
 .go-to-game {
-    margin: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
     background-color: #1d82ee;
     color: white;
@@ -95,19 +96,19 @@
 }
 
 .whos-that-pokemon-container {
-    margin: 20px;
-    padding: 20px;
+    margin: 10px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .whos-that-pokemon-container h1 {
-    margin: 10px;
+    margin-left: 10px;
 }
 
 .whos-that-pokemon-container h5 {
-    margin: 10px;
+    margin-left: 10px;
 }
 
 .background-image {
@@ -116,6 +117,7 @@
     margin: 10px;
     position: relative;
     z-index: 1;
+    border-radius: 5px;
 }
 
 .mystery-pokemon-image {
@@ -150,4 +152,32 @@
 
 .pagination button.active {
     background-color: #879488;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    width: 50%;
+    height: 100%;
+    margin-left: 5px;
+}
+
+.choices button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    background-color: #1d82ee;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1vw;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.choices button:hover {
+    background-color: #d3460a;
 }

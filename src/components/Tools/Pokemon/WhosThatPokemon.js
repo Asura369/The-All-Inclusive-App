@@ -89,23 +89,24 @@ const WhosThatPokemon = () => {
             {activeGeneration >= 1 && activeGeneration <= 8 ? (
                 <div className="whos-that-pokemon-container">
                     <div>
-                        <img
-                            src={BackgroundImage}
-                            alt="Background"
-                            className="background-image"
-                        />
-                        <img
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${generateRandomPokemon()}.png`}
-                            alt="mystery-pokemon"
-                            className="mystery-pokemon-image"
-                        />
-                    </div>
-
-                    <div>
-                        <button className="go-to-game">Choice 1</button>
-                        <button className="go-to-game">Choice 2</button>
-                        <button className="go-to-game">Choice 3</button>
-                        <button className="go-to-game">Choice 4</button>
+                        <div>
+                            <img
+                                src={BackgroundImage}
+                                alt="Background"
+                                className="background-image"
+                            />
+                            <img
+                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${generateRandomPokemon()}.png`}
+                                alt="mystery-pokemon"
+                                className="mystery-pokemon-image"
+                            />
+                        </div>
+                        <div className="choices">
+                            <button>Choice1</button>
+                            <button>Choice2</button>
+                            <button>Choice3</button>
+                            <button>Choice4</button>
+                        </div>
                     </div>
                 </div>
             ) : null}
