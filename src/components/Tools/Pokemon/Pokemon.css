@@ -121,6 +121,11 @@
 }
 
 .mystery-pokemon-image {
+    display: none;
+}
+
+.mystery-pokemon-image.active {
+    display: inline;
     width: 18%; /* Adjust the size as needed */
     height: 18%; /* Adjust the size as needed */
     z-index: 2;
@@ -180,4 +185,27 @@
 
 .choices button:hover {
     background-color: #d3460a;
+}
+
+.start-game {
+    width: 18%; /* Adjust the size as needed */
+    height: 18%; /* Adjust the size as needed */
+    z-index: 3;
+    position: relative;
+    left: -46%;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.start-game:hover {
+    background-color: #031e04;
+}
+
+.start-game.active {
+    display: none;
 }

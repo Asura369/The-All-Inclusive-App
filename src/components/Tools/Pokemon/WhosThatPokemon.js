@@ -8,6 +8,7 @@ const WhosThatPokemon = () => {
     const [pokemonList, setPokemonList] = useState([])
     const [activeGeneration, setActiveGeneration] = useState()
     const [playGame, setPlayGame] = useState(false)
+    const [start, setStart] = useState(false)
     const [mysteryPokemonSrc, setMysteryPokemonSrc] = useState('')
     const [answerChoices, setAnswerChoices] = useState([])
 
@@ -25,6 +26,7 @@ const WhosThatPokemon = () => {
     const fetchPokemonList = async (generation) => {
         setMysteryPokemonSrc('')
         setAnswerChoices([])
+        setStart(false)
         const limit_value =
             generation_dict[generation][1] - generation_dict[generation][0]
         const offset_value = generation_dict[generation][0]
@@ -53,6 +55,7 @@ const WhosThatPokemon = () => {
 
     const startGame = () => {
         generateRandomPokemon()
+        setStart(!start)
     }
 
     const generateRandomPokemon = () => {
@@ -73,6 +76,15 @@ const WhosThatPokemon = () => {
             } while (choiceList.includes(randomPokemon.name))
             choiceList.push(randomPokemon.name)
         }
+
+        //Fisher Yates Shuffle
+        for (let i = choiceList.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1))
+            let k = choiceList[i]
+            choiceList[i] = choiceList[j]
+            choiceList[j] = k
+        }
+
         setAnswerChoices(choiceList)
     }
 
@@ -118,18 +130,34 @@ const WhosThatPokemon = () => {
                                 alt="Background"
                                 className="background-image"
                             />
-                            <button className="go-to-game" onClick={startGame}>
+                            <button
+                                className={
+                                    start === true
+                                        ? 'start-game active'
+                                        : 'start-game'
+                                }
+                                onClick={startGame}
+                            >
                                 Start Game
                             </button>
                             <img
                                 src={mysteryPokemonSrc}
                                 alt="mystery-pokemon"
-                                className="mystery-pokemon-image"
+                                className={
+                                    start === true
+                                        ? 'mystery-pokemon-image active'
+                                        : 'mystery-pokemon-image'
+                                }
                             />
                         </div>
                         <div className="choices">
                             {answerChoices.map((pokemonName) => (
-                                <button key={pokemonName}>{pokemonName}</button>
+                                <button
+                                    className="pokemon-name"
+                                    key={pokemonName}
+                                >
+                                    {pokemonName}
+                                </button>
                             ))}
                         </div>
                     </div>
