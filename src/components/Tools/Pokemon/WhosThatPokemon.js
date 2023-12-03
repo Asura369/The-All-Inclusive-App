@@ -8,6 +8,8 @@ const WhosThatPokemon = () => {
     const [pokemonList, setPokemonList] = useState([])
     const [activeGeneration, setActiveGeneration] = useState()
     const [playGame, setPlayGame] = useState(false)
+    const [mysteryPokemonSrc, setMysteryPokemonSrc] = useState('')
+    const [answerChoices, setAnswerChoices] = useState([])
 
     const generation_dict = {
         1: [0, 151],
@@ -21,6 +23,8 @@ const WhosThatPokemon = () => {
     }
 
     const fetchPokemonList = async (generation) => {
+        setMysteryPokemonSrc('')
+        setAnswerChoices([])
         const limit_value =
             generation_dict[generation][1] - generation_dict[generation][0]
         const offset_value = generation_dict[generation][0]
@@ -47,10 +51,29 @@ const WhosThatPokemon = () => {
         return pokemon_id
     }
 
+    const startGame = () => {
+        generateRandomPokemon()
+    }
+
     const generateRandomPokemon = () => {
-        const randomIndex = Math.floor(Math.random() * pokemonList.length)
-        const randomPokemon = pokemonList[randomIndex]
-        return getPokemonIdFromUrl(randomPokemon.url)
+        let randomIndex = Math.floor(Math.random() * pokemonList.length)
+        let randomPokemon = pokemonList[randomIndex]
+        const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
+            randomPokemon.url
+        )}.png`
+
+        const choiceList = []
+        choiceList.push(randomPokemon.name)
+        setMysteryPokemonSrc(mysteryPokemonUrl)
+
+        for (let i = 1; i <= 3; i++) {
+            do {
+                randomIndex = Math.floor(Math.random() * pokemonList.length)
+                randomPokemon = pokemonList[randomIndex]
+            } while (choiceList.includes(randomPokemon.name))
+            choiceList.push(randomPokemon.name)
+        }
+        setAnswerChoices(choiceList)
     }
 
     return (
@@ -95,17 +118,19 @@ const WhosThatPokemon = () => {
                                 alt="Background"
                                 className="background-image"
                             />
+                            <button className="go-to-game" onClick={startGame}>
+                                Start Game
+                            </button>
                             <img
-                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${generateRandomPokemon()}.png`}
+                                src={mysteryPokemonSrc}
                                 alt="mystery-pokemon"
                                 className="mystery-pokemon-image"
                             />
                         </div>
                         <div className="choices">
-                            <button>Choice1</button>
-                            <button>Choice2</button>
-                            <button>Choice3</button>
-                            <button>Choice4</button>
+                            {answerChoices.map((pokemonName) => (
+                                <button key={pokemonName}>{pokemonName}</button>
+                            ))}
                         </div>
                     </div>
                 </div>
