@@ -9,8 +9,11 @@ const WhosThatPokemon = () => {
     const [activeGeneration, setActiveGeneration] = useState()
     const [playGame, setPlayGame] = useState(false)
     const [start, setStart] = useState(false)
+    const [mysteryPokemon, setMysteryPokemon] = useState('')
     const [mysteryPokemonSrc, setMysteryPokemonSrc] = useState('')
     const [answerChoices, setAnswerChoices] = useState([])
+    const [showMysteryPokemon, setShowMysteryPokemon] = useState(false)
+    const [score, setScore] = useState(0)
 
     const generation_dict = {
         1: [0, 151],
@@ -24,7 +27,10 @@ const WhosThatPokemon = () => {
     }
 
     const fetchPokemonList = async (generation) => {
+        setScore(0)
+        setShowMysteryPokemon(false)
         setMysteryPokemonSrc('')
+        setMysteryPokemon('')
         setAnswerChoices([])
         setStart(false)
         const limit_value =
@@ -59,6 +65,7 @@ const WhosThatPokemon = () => {
     }
 
     const generateRandomPokemon = () => {
+        setShowMysteryPokemon(false)
         let randomIndex = Math.floor(Math.random() * pokemonList.length)
         let randomPokemon = pokemonList[randomIndex]
         const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
@@ -67,6 +74,7 @@ const WhosThatPokemon = () => {
 
         const choiceList = []
         choiceList.push(randomPokemon.name)
+        setMysteryPokemon(randomPokemon.name)
         setMysteryPokemonSrc(mysteryPokemonUrl)
 
         for (let i = 1; i <= 3; i++) {
@@ -86,6 +94,17 @@ const WhosThatPokemon = () => {
         }
 
         setAnswerChoices(choiceList)
+    }
+
+    const checkAnswer = (pokemonName) => {
+        if (pokemonName === mysteryPokemon) {
+            setShowMysteryPokemon(true)
+            setScore(score + 1)
+
+            setTimeout(() => {
+                generateRandomPokemon()
+            }, 2000)
+        }
     }
 
     return (
@@ -124,11 +143,22 @@ const WhosThatPokemon = () => {
             {activeGeneration >= 1 && activeGeneration <= 8 ? (
                 <div className="whos-that-pokemon-container">
                     <div>
-                        <div>
+                        <div className="game-screen">
                             <img
                                 src={BackgroundImage}
                                 alt="Background"
                                 className="background-image"
+                            />
+                            <img
+                                src={mysteryPokemonSrc}
+                                alt="mystery-pokemon"
+                                className={
+                                    start
+                                        ? showMysteryPokemon
+                                            ? 'mystery-pokemon-image shown'
+                                            : 'mystery-pokemon-image active'
+                                        : 'mystery-pokemon-image'
+                                }
                             />
                             <button
                                 className={
@@ -140,21 +170,14 @@ const WhosThatPokemon = () => {
                             >
                                 Start Game
                             </button>
-                            <img
-                                src={mysteryPokemonSrc}
-                                alt="mystery-pokemon"
-                                className={
-                                    start === true
-                                        ? 'mystery-pokemon-image active'
-                                        : 'mystery-pokemon-image'
-                                }
-                            />
+                            <div className="score">Score: {score}</div>
                         </div>
                         <div className="choices">
                             {answerChoices.map((pokemonName) => (
                                 <button
                                     className="pokemon-name"
                                     key={pokemonName}
+                                    onClick={() => checkAnswer(pokemonName)}
                                 >
                                     {pokemonName}
                                 </button>

@@ -134,6 +134,16 @@
     filter: brightness(0.0001);
 }
 
+.mystery-pokemon-image.shown {
+    display: inline;
+    width: 18%; /* Adjust the size as needed */
+    height: 18%; /* Adjust the size as needed */
+    z-index: 2;
+    position: relative;
+    left: -46%;
+    filter: brightness(1);
+}
+
 .pagination {
     display: flex;
     margin: 10px;
@@ -208,4 +218,13 @@
 
 .start-game.active {
     display: none;
+}
+
+.game-screen {
+    display: inline-block;
+}
+
+.score {
+    display: inline-block;
+    font-size: 2vw;
 }
