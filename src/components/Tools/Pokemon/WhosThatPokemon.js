@@ -12,8 +12,8 @@ const WhosThatPokemon = () => {
     const [mysteryPokemon, setMysteryPokemon] = useState('')
     const [mysteryPokemonSrc, setMysteryPokemonSrc] = useState('')
     const [answerChoices, setAnswerChoices] = useState([])
-    const [showMysteryPokemon, setShowMysteryPokemon] = useState(false)
-    const [score, setScore] = useState(0)
+    const [showOverlay, setShowOverlay] = useState(false)
+    const [answerCorrect, setAnswerCorrect] = useState(false)
 
     const generation_dict = {
         1: [0, 151],
@@ -27,12 +27,7 @@ const WhosThatPokemon = () => {
     }
 
     const fetchPokemonList = async (generation) => {
-        setScore(0)
-        setShowMysteryPokemon(false)
-        setMysteryPokemonSrc('')
-        setMysteryPokemon('')
-        setAnswerChoices([])
-        setStart(false)
+        resetGameStates()
         const limit_value =
             generation_dict[generation][1] - generation_dict[generation][0]
         const offset_value = generation_dict[generation][0]
@@ -47,6 +42,15 @@ const WhosThatPokemon = () => {
         } catch (error) {
             console.error('Error fetching Pokemon data:', error)
         }
+    }
+
+    const resetGameStates = () => {
+        setAnswerCorrect(false)
+        setShowOverlay(false)
+        setMysteryPokemonSrc('')
+        setMysteryPokemon('')
+        setAnswerChoices([])
+        setStart(false)
     }
 
     const handlePlayGame = () => {
@@ -65,7 +69,6 @@ const WhosThatPokemon = () => {
     }
 
     const generateRandomPokemon = () => {
-        setShowMysteryPokemon(false)
         let randomIndex = Math.floor(Math.random() * pokemonList.length)
         let randomPokemon = pokemonList[randomIndex]
         const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
@@ -97,19 +100,27 @@ const WhosThatPokemon = () => {
     }
 
     const checkAnswer = (pokemonName) => {
+        setShowOverlay(true)
         if (pokemonName === mysteryPokemon) {
-            setShowMysteryPokemon(true)
-            setScore(score + 1)
+            setAnswerCorrect(true)
 
             setTimeout(() => {
                 generateRandomPokemon()
-            }, 2000)
+                setShowOverlay(false)
+            }, 1500)
+        } else {
+            setAnswerCorrect(false)
+
+            setTimeout(() => {
+                generateRandomPokemon()
+                setShowOverlay(false)
+            }, 1500)
         }
     }
 
     return (
         <div className="whos-that-pokemon-container">
-            <h1>Whos That Pokemon</h1>
+            <h3>Whos That Pokemon</h3>
             {playGame === false ? (
                 <div>
                     <Link to="/PokemonWiki" className="go-to-game">
@@ -121,7 +132,6 @@ const WhosThatPokemon = () => {
                 </div>
             ) : (
                 <div>
-                    <h5>Choose Pokemon Generation:</h5>
                     <div className="generation-buttons">
                         {[1, 2, 3, 4, 5, 6, 7, 8].map((generation) => (
                             <button
@@ -142,8 +152,10 @@ const WhosThatPokemon = () => {
 
             {activeGeneration >= 1 && activeGeneration <= 8 ? (
                 <div className="whos-that-pokemon-container">
-                    <div>
-                        <div className="game-screen">
+                    <div
+                        className={`game-screen ${showOverlay ? 'active' : ''}`}
+                    >
+                        <div className="image-section">
                             <img
                                 src={BackgroundImage}
                                 alt="Background"
@@ -154,9 +166,7 @@ const WhosThatPokemon = () => {
                                 alt="mystery-pokemon"
                                 className={
                                     start
-                                        ? showMysteryPokemon
-                                            ? 'mystery-pokemon-image shown'
-                                            : 'mystery-pokemon-image active'
+                                        ? 'mystery-pokemon-image active'
                                         : 'mystery-pokemon-image'
                                 }
                             />
@@ -170,7 +180,6 @@ const WhosThatPokemon = () => {
                             >
                                 Start Game
                             </button>
-                            <div className="score">Score: {score}</div>
                         </div>
                         <div className="choices">
                             {answerChoices.map((pokemonName) => (
@@ -183,6 +192,30 @@ const WhosThatPokemon = () => {
                                 </button>
                             ))}
                         </div>
+                        <div className="overlay"></div>
+                        {answerCorrect === true ? (
+                            <div className="popup">
+                                <h3 className="pokemon-name correct">
+                                    Hooray, It's {mysteryPokemon}!
+                                </h3>
+                                <img
+                                    src={mysteryPokemonSrc}
+                                    alt="mystery-pokemon"
+                                    className={'mystery-pokemon-image shown'}
+                                />
+                            </div>
+                        ) : (
+                            <div className="popup">
+                                <h3 className="pokemon-name incorrect">
+                                    Errrrr, It's {mysteryPokemon}!
+                                </h3>
+                                <img
+                                    src={mysteryPokemonSrc}
+                                    alt="mystery-pokemon"
+                                    className={'mystery-pokemon-image shown'}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             ) : null}

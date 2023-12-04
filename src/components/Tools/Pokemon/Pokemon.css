@@ -3,7 +3,7 @@
     margin: 20px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 9px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,6 +40,16 @@
     text-transform: capitalize;
 }
 
+.pokemon-name.correct {
+    text-transform: capitalize;
+    color: forestgreen;
+}
+
+.pokemon-name.incorrect {
+    text-transform: capitalize;
+    color: crimson;
+}
+
 .pokemon-id {
     font-weight: bold;
 }
@@ -56,13 +66,13 @@
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1vw;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
 }
 
@@ -87,7 +97,7 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
 }
 
@@ -99,25 +109,25 @@
     margin: 10px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 9px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.whos-that-pokemon-container h1 {
+.whos-that-pokemon-container h3 {
     margin-left: 10px;
 }
 
-.whos-that-pokemon-container h5 {
-    margin-left: 10px;
+.image-section {
+    margin-left: 15%;
 }
 
 .background-image {
-    width: 50%; /* Adjust the size as needed */
-    height: 50%; /* Adjust the size as needed */
+    width: 72%; /* Adjust the size as needed */
+    height: 72%; /* Adjust the size as needed */
     margin: 10px;
     position: relative;
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 9px;
 }
 
 .mystery-pokemon-image {
@@ -130,17 +140,38 @@
     height: 18%; /* Adjust the size as needed */
     z-index: 2;
     position: relative;
-    left: -46%;
+    left: -62%;
+    transform: scale(1.5);
     filter: brightness(0.0001);
+
+    @media (max-width: 480px) {
+        width: 15%; /* Adjust the size as needed */
+        height: 15%; /* Adjust the size as needed */
+    }
+    @media (max-width: 400px) {
+        width: 12%; /* Adjust the size as needed */
+        height: 12%; /* Adjust the size as needed */
+    }
+    @media (max-width: 320px) {
+        width: 9%; /* Adjust the size as needed */
+        height: 9%; /* Adjust the size as needed */
+    }
+    @media (max-width: 240px) {
+        width: 6%; /* Adjust the size as needed */
+        height: 6%; /* Adjust the size as needed */
+    }
+    @media (max-width: 180px) {
+        width: 3%; /* Adjust the size as needed */
+        height: 3%; /* Adjust the size as needed */
+    }
 }
 
 .mystery-pokemon-image.shown {
     display: inline;
-    width: 18%; /* Adjust the size as needed */
-    height: 18%; /* Adjust the size as needed */
+    width: 60%; /* Adjust the size as needed */
+    height: 60%; /* Adjust the size as needed */
     z-index: 2;
     position: relative;
-    left: -46%;
     filter: brightness(1);
 }
 
@@ -157,7 +188,7 @@
     padding: 10px 20px;
     border: 1px solid #ddd;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
 }
 
@@ -171,25 +202,21 @@
 
 .choices {
     display: grid;
-    grid-template-columns: repeat(4, 25%);
-    width: 50%;
-    height: 100%;
-    margin-left: 5px;
+    grid-template-columns: repeat(4, 20%);
+    justify-content: center;
+    gap: 10px;
 }
 
 .choices button {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
     background-color: #1d82ee;
     color: white;
-    padding: 10px 20px;
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1vw;
+    font-size: 1.5vw;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
 }
 
@@ -202,13 +229,13 @@
     height: 18%; /* Adjust the size as needed */
     z-index: 3;
     position: relative;
-    left: -46%;
+    left: -62%;
     background-color: #4caf50;
     color: white;
-    padding: 10px 20px;
+    padding: 6px 12px;
     border: 1px solid #ddd;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
 }
 
@@ -221,10 +248,37 @@
 }
 
 .game-screen {
-    display: inline-block;
+    position: relative;
+    text-align: center;
+    justify-content: center;
 }
 
-.score {
-    display: inline-block;
-    font-size: 2vw;
+.game-screen.active .overlay,
+.game-screen.active .popup {
+    display: block; /* Overide display none to show overlay and popup*/
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* 0.8 gray overlay */
+    display: none; /* Initially hidden */
+    z-index: 99;
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    z-index: 99;
+    text-align: center;
 }
