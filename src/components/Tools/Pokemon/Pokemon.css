@@ -264,9 +264,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* 0.8 gray overlay */
+    background: rgba(0, 0, 0, 0.6); /* 0.8 gray overlay */
     display: none; /* Initially hidden */
     z-index: 99;
+    border-radius: 9px;
 }
 
 .popup {
