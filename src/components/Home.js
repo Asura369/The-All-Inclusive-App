@@ -10,26 +10,32 @@ const Home = () => {
             <h1>Welcome to The All Inclusive App</h1>
             <p>Explore various apps below:</p>
             <nav>
-                <ul className="tool-list">
-                    <li className="tool-list-item">
+                <ul className="app-list">
+                    <li className="app-list-item">
                         <Link to="/PasswordGenerator" className="card-link">
                             <h3>Password Generator</h3>
                             <p>Generate strong and secure passwords</p>
                         </Link>
                     </li>
-                    <li className="tool-list-item">
+                    <li className="app-list-item">
                         <Link to="/PokemonWiki" className="card-link">
                             <h3>Pokemon Wiki</h3>
                             <p>See Pokemon from each Generation</p>
                         </Link>
                     </li>
-                    <li className="tool-list-item">
+                    <li className="app-list-item">
                         <Link to="/WhosThatPokemon" className="card-link">
                             <h3>Whos That Pokemon</h3>
                             <p>Whos That Pokemon Game</p>
                         </Link>
                     </li>
-                    {/* Add more tools as needed */}
+                    <li className="app-list-item">
+                        <Link to="/Snake" className="card-link">
+                            <h3>Snake</h3>
+                            <p>Play the Snake game</p>
+                        </Link>
+                    </li>
+                    {/* Add more Apps as needed */}
                 </ul>
             </nav>
         </div>

@@ -8,14 +8,14 @@
     margin: 10px;
 }
 
-.tool-list {
+.app-list {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
 }
 
-.tool-list-item {
+.app-list-item {
     margin-right: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -27,18 +27,18 @@
     transition: transform 0.3s ease;
 }
 
-.tool-list-item:hover {
+.app-list-item:hover {
     transform: scale(1.05);
 }
 
 @media (max-width: 900px) {
-    .tool-list-item {
+    .app-list-item {
         width: calc(50% - 10px); /* Adjusted width for two items in a row */
     }
 }
 
 @media (max-width: 480px) {
-    .tool-list-item {
+    .app-list-item {
         width: calc(100% - 10px); /* Adjusted width for one items in a row */
     }
 }

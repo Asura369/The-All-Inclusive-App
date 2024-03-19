@@ -5,9 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Home from './components/Home'
 import TopNavigationBar from './components/TopNavigationBar'
-import PasswordGenerator from './components/Tools/PasswordGenerator/PasswordGenerator'
-import PokemonWiki from './components/Tools/Pokemon/PokemonWiki'
-import WhosThatPokemon from './components/Tools/Pokemon/WhosThatPokemon'
+import PasswordGenerator from './components/Apps/PasswordGenerator/PasswordGenerator'
+import PokemonWiki from './components/Apps/Pokemon/PokemonWiki'
+import WhosThatPokemon from './components/Apps/Pokemon/WhosThatPokemon'
+import SnakeGame from './components/Apps/SnakeGame/SnakeGame'
 import LoginPage from './components/LoginPage'
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
                         path="/WhosThatPokemon"
                         element={<WhosThatPokemon />}
                     />
-                    {/* Add routes for other tools here */}
+                    <Route path="/Snake" element={<SnakeGame />} />
+                    {/* Add routes for other Apps here */}
                 </Routes>
             </div>
         </Router>

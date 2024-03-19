@@ -1,0 +1,53 @@
+/* src/components/Apps/SnakeGame/SnakeGame.css */
+
+.snake-game-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.board {
+    width: 360px; /* Default width */
+    height: 360px; /* Default height */
+    border-style: solid;
+    position: relative;
+}
+
+.snake-segment {
+    width: 10px;
+    height: 10px;
+    background-color: green; /* Snake color */
+    position: absolute;
+}
+
+.food {
+    width: 10px;
+    height: 10px;
+    background-color: red; /* Food color */
+    position: absolute;
+    border-radius: 50%; /* To make it round */
+}
+
+.game-over {
+    text-align: center;
+}
+
+.game-over h2 {
+    color: red;
+    font-size: 24px;
+}
+
+.play-again-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.play-again-button:hover {
+    background-color: #45a049;
+}
