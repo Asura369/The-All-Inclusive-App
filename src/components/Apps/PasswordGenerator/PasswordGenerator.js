@@ -1,4 +1,4 @@
-// src/components/Tools/PasswordGenerator/PasswordGenerator.js
+// src/components/Apps/PasswordGenerator/PasswordGenerator.js
 import React, { useState } from 'react'
 import './PasswordGenerator.css'
 

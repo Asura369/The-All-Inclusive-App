@@ -1,4 +1,4 @@
-// src/components/Tools/Pokemon/WhosThatPokemon.js
+// src/components/Apps/Pokemon/WhosThatPokemon.js
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Pokemon.css'

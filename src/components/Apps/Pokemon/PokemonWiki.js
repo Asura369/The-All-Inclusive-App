@@ -1,4 +1,4 @@
-// src/components/Tools/Pokemon/PokemonWiki.js
+// src/components/Apps/Pokemon/PokemonWiki.js
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Pokemon.css'
