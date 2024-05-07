@@ -1,6 +1,6 @@
 An react app that includes many small apps within.
 
-Live website at: [the-all-inclusive-app.vercel.app/](the-all-inclusive-app.vercel.app/)
+Live website at: [the-all-inclusive-app.vercel.app/](https://the-all-inclusive-app.vercel.app/)
 
 #
 

@@ -35,6 +35,15 @@ const Home = () => {
                             <p>Play the Snake game</p>
                         </Link>
                     </li>
+                    <li className="app-list-item">
+                        <Link
+                            to="https://calendar-app-nu-self.vercel.app/"
+                            className="card-link"
+                        >
+                            <h3>To-Do Calendar</h3>
+                            <p>A Calendar with To-Do feature</p>
+                        </Link>
+                    </li>
                     {/* Add more Apps as needed */}
                 </ul>
             </nav>

@@ -28,7 +28,7 @@ const SnakeGame = () => {
             const interval = setInterval(moveSnake, 100) // Set interval to call moveSnake function
             return () => clearInterval(interval) // Clear interval when re-render
         }
-    }, [snake, gameOver])
+    }, [snake, gameOver]) // eslint-disable-line
 
     // Effect to change snake direction base on keyboard input
     useEffect(() => {
@@ -60,7 +60,7 @@ const SnakeGame = () => {
     // Effect to initialize the game
     useEffect(() => {
         initializeGame()
-    }, [])
+    }, []) // eslint-disable-line
 
     // Function to initialize/reset the game state
     const initializeGame = () => {
