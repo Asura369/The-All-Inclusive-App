@@ -36,6 +36,12 @@ const Home = () => {
                         </Link>
                     </li>
                     <li className="app-list-item">
+                        <Link to="/QRCodeGenerator" className="card-link">
+                            <h3>QR Code Generator</h3>
+                            <p>Create and download custom QR codes</p>
+                        </Link>
+                    </li>
+                    <li className="app-list-item">
                         <Link
                             to="https://calendar-app-nu-self.vercel.app/"
                             className="card-link"
