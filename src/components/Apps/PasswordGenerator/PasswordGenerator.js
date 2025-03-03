@@ -107,6 +107,7 @@ const PasswordGenerator = () => {
     // Generate a password on initial render
     useEffect(() => {
         generatePassword()
+        // eslint-disable-next-line
     }, [])
 
     // Update password strength whenever the password changes
