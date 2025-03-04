@@ -1,32 +1,64 @@
 // src/components/Apps/Pokemon/PokemonWiki.js
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import './Pokemon.css'
+import {
+    Container,
+    Row,
+    Col,
+    Card,
+    Button,
+    Spinner,
+    Badge,
+    Form
+} from 'react-bootstrap'
+import { FaGamepad, FaSearch, FaInfoCircle } from 'react-icons/fa'
+import './PokemonWiki.css'
 
 const PokemonWiki = () => {
     const [pokemonList, setPokemonList] = useState([]) // Store the list of Pokemon
-    const [activeGeneration, setActiveGeneration] = useState() // Store the active Pokemon generation
-    const [currentPage, setCurrentPage] = useState(1) // Store the current page number for pagination
-    const itemsPerPage = 20 // Number of Pokemon items to display per page
+    const [activeGeneration, setActiveGeneration] = useState(null) // Store the active Pokemon generation
+    const [loading, setLoading] = useState(false) // Loading state
+    const [searchTerm, setSearchTerm] = useState('') // Search term
+    const [filteredList, setFilteredList] = useState([]) // Filtered Pokemon list
 
     // Pokemon generation range dictionary
     const generation_dict = {
-        1: [0, 151],
-        2: [151, 251],
-        3: [251, 386],
-        4: [386, 493],
-        5: [493, 649],
-        6: [649, 721],
-        7: [721, 809],
-        8: [809, 905]
+        1: { range: [0, 151], name: 'Kanto' },
+        2: { range: [151, 251], name: 'Johto' },
+        3: { range: [251, 386], name: 'Hoenn' },
+        4: { range: [386, 493], name: 'Sinnoh' },
+        5: { range: [493, 649], name: 'Unova' },
+        6: { range: [649, 721], name: 'Kalos' },
+        7: { range: [721, 809], name: 'Alola' },
+        8: { range: [809, 905], name: 'Galar' }
     }
+
+    // Effect to filter Pokemon based on search term
+    useEffect(() => {
+        if (pokemonList.length > 0) {
+            const filtered = pokemonList.filter(
+                (pokemon) =>
+                    pokemon.name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                    getPokemonIdFromUrl(pokemon.url)
+                        .toString()
+                        .includes(searchTerm)
+            )
+            setFilteredList(filtered)
+        }
+    }, [searchTerm, pokemonList])
 
     // Fetch Pokemon list based on the selected generation
     const fetchPokemonList = async (generation) => {
-        setCurrentPage(1) // Reset the current page when changing the generation
-        const limit_value =
-            generation_dict[generation][1] - generation_dict[generation][0]
-        const offset_value = generation_dict[generation][0]
+        setLoading(true)
+        setSearchTerm('') // Clear search when changing generation
+
+        const [offset_value, limit_value] = [
+            generation_dict[generation].range[0],
+            generation_dict[generation].range[1] -
+                generation_dict[generation].range[0]
+        ]
 
         try {
             const response = await fetch(
@@ -35,9 +67,12 @@ const PokemonWiki = () => {
             const data = await response.json()
             const data_list = data.results
             setPokemonList(data_list)
+            setFilteredList(data_list)
             setActiveGeneration(generation)
         } catch (error) {
             console.error('Error fetching Pokemon data:', error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -48,68 +83,180 @@ const PokemonWiki = () => {
         return pokemon_id
     }
 
-    // Pagination logic
-    const indexOfLastItem = currentPage * itemsPerPage
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage
-    const currentItems = pokemonList.slice(indexOfFirstItem, indexOfLastItem)
+    // Format Pokemon name to be capitalized and remove hyphens
+    function formatPokemonName(name) {
+        return name
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+    }
 
-    // Set the current page number
-    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+    // Handle search input change
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value)
+    }
 
     // JSX rendering
     return (
-        <div className="pokemon-list-container">
-            <h1>Pokemon List</h1>
-            <Link to="/WhosThatPokemon" className="go-to-game">
-                Play Whos That Pokemon Game
-            </Link>
-            <div className="generation-buttons">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((generation) => (
-                    <button
-                        key={generation}
-                        className={
-                            generation === activeGeneration ? 'active' : ''
-                        }
-                        onClick={() => fetchPokemonList(generation)}
-                    >
-                        Generation {generation}
-                    </button>
-                ))}
+        <Container className="pokemon-wiki-container">
+            <div className="pokemon-header">
+                <h1 className="pokemon-title">Pokémon Encyclopedia</h1>
+                <p className="pokemon-subtitle">
+                    Explore Pokémon from all generations
+                </p>
+
+                <Link to="/WhosThatPokemon" className="game-link">
+                    <FaGamepad className="game-icon" /> Play Who's That Pokémon?
+                </Link>
             </div>
-            <ul className="pokemon-table">
-                {currentItems.map((pokemon) => (
-                    <li key={pokemon.name} className="pokemon-item">
-                        <span className="pokemon-id">
-                            {getPokemonIdFromUrl(pokemon.url)}
-                        </span>
-                        <img
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
-                                pokemon.url
-                            )}.png`}
-                            alt={pokemon.name}
-                            className="pokemon-image"
-                        />
-                        <span className="pokemon-name">{pokemon.name} </span>
-                    </li>
-                ))}
-            </ul>
-            <div className="pagination">
-                {Array.from(
-                    { length: Math.ceil(pokemonList.length / itemsPerPage) },
-                    (_, index) => (
-                        <button
-                            key={index + 1}
-                            onClick={() => paginate(index + 1)}
-                            className={
-                                currentPage === index + 1 ? 'active' : ''
+
+            <div className="generation-selector">
+                <h4 className="selector-title">Select a Region</h4>
+                <div className="generation-buttons">
+                    {Object.keys(generation_dict).map((generation) => (
+                        <Button
+                            key={generation}
+                            variant={
+                                activeGeneration === parseInt(generation)
+                                    ? 'primary'
+                                    : 'outline-primary'
+                            }
+                            className="generation-button"
+                            onClick={() =>
+                                fetchPokemonList(parseInt(generation))
                             }
                         >
-                            {index + 1}
-                        </button>
-                    )
-                )}
+                            Gen {generation}: {generation_dict[generation].name}
+                        </Button>
+                    ))}
+                </div>
             </div>
-        </div>
+
+            {activeGeneration && (
+                <div className="pokemon-content">
+                    <div className="search-container">
+                        <Form.Group className="mb-3">
+                            <div className="search-input-wrapper">
+                                <FaSearch className="search-icon" />
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search by name or number..."
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    className="search-input"
+                                />
+                            </div>
+                        </Form.Group>
+                        <div className="results-info">
+                            <Badge bg="info">
+                                <FaInfoCircle /> Showing {filteredList.length}{' '}
+                                Pokémon from Generation {activeGeneration}
+                            </Badge>
+                        </div>
+                    </div>
+
+                    {loading ? (
+                        <div className="loading-container">
+                            <Spinner
+                                animation="border"
+                                role="status"
+                                variant="primary"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </Spinner>
+                            <p>Loading Pokémon data...</p>
+                        </div>
+                    ) : (
+                        <>
+                            <Row className="pokemon-grid">
+                                {filteredList.map((pokemon) => {
+                                    const pokemonId = getPokemonIdFromUrl(
+                                        pokemon.url
+                                    )
+                                    return (
+                                        <Col
+                                            key={pokemon.name}
+                                            xs={6}
+                                            sm={6}
+                                            md={4}
+                                            lg={3}
+                                            className="mb-4"
+                                        >
+                                            <Card className="pokemon-card">
+                                                <div className="pokemon-id-badge">
+                                                    #{pokemonId}
+                                                </div>
+                                                <div className="pokemon-image-container">
+                                                    <Card.Img
+                                                        variant="top"
+                                                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+                                                        alt={pokemon.name}
+                                                        className="pokemon-image"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                                <Card.Body>
+                                                    <Card.Title className="pokemon-name">
+                                                        {formatPokemonName(
+                                                            pokemon.name
+                                                        )}
+                                                    </Card.Title>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+
+                            {filteredList.length === 0 && (
+                                <div className="no-results">
+                                    <p>
+                                        No Pokémon found matching "{searchTerm}"
+                                    </p>
+                                    <Button
+                                        variant="outline-primary"
+                                        onClick={() => setSearchTerm('')}
+                                    >
+                                        Clear Search
+                                    </Button>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+            )}
+
+            {!activeGeneration && !loading && (
+                <div className="welcome-message">
+                    <h2>Welcome to the Pokémon Encyclopedia!</h2>
+                    <p>Select a generation above to start exploring Pokémon.</p>
+                    <img
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                        alt="Pikachu"
+                        className="welcome-image"
+                    />
+                </div>
+            )}
+
+            <div className="api-attribution">
+                <p>
+                    Pokémon data provided by{' '}
+                    <a
+                        href="https://pokeapi.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        PokéAPI
+                    </a>
+                </p>
+                <p>
+                    Pokémon and Pokémon character names are trademarks of
+                    Nintendo.
+                </p>
+            </div>
+        </Container>
     )
 }
 

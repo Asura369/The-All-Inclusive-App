@@ -1,7 +1,7 @@
 // src/components/Apps/Pokemon/WhosThatPokemon.js
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './Pokemon.css'
+import './WhosThatPokemon.css'
 import BackgroundImage from './Background.webp'
 
 const WhosThatPokemon = () => {
@@ -17,14 +17,14 @@ const WhosThatPokemon = () => {
 
     // Dictionary to map Pokemon generations to their range in the Pokedex
     const generation_dict = {
-        1: [0, 151],
-        2: [151, 251],
-        3: [251, 386],
-        4: [386, 493],
-        5: [493, 649],
-        6: [649, 721],
-        7: [721, 809],
-        8: [809, 905]
+        1: { range: [0, 151], name: 'Kanto' },
+        2: { range: [151, 251], name: 'Johto' },
+        3: { range: [251, 386], name: 'Hoenn' },
+        4: { range: [386, 493], name: 'Sinnoh' },
+        5: { range: [493, 649], name: 'Unova' },
+        6: { range: [649, 721], name: 'Kalos' },
+        7: { range: [721, 809], name: 'Alola' },
+        8: { range: [809, 905], name: 'Galar' }
     }
 
     // Fetches the list of Pokemon for the specified generation from the PokeAPI
@@ -33,8 +33,9 @@ const WhosThatPokemon = () => {
 
         // Variables to control the range of fetching from the PokeAPI
         const limit_value =
-            generation_dict[generation][1] - generation_dict[generation][0]
-        const offset_value = generation_dict[generation][0]
+            generation_dict[generation].range[1] -
+            generation_dict[generation].range[0]
+        const offset_value = generation_dict[generation].range[0]
 
         // Try fetching from the PokeAPI and storing the data
         try {
@@ -75,11 +76,13 @@ const WhosThatPokemon = () => {
     // Starts a new game round
     const startGame = () => {
         generateRandomPokemon()
-        setStart(!start)
+        setStart(true)
     }
 
     // Generates a new mystery Pokemon and answer choices for the current round
     const generateRandomPokemon = () => {
+        if (pokemonList.length === 0) return
+
         let randomIndex = Math.floor(Math.random() * pokemonList.length)
         let randomPokemon = pokemonList[randomIndex]
         const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
@@ -136,13 +139,13 @@ const WhosThatPokemon = () => {
 
     return (
         <div className="whos-that-pokemon-container">
-            <h3>Whos That Pokemon</h3>
+            <h3>Who's That Pokémon?</h3>
 
             {playGame === false ? (
                 <div>
                     {/* Link to PokemonWiki */}
                     <Link to="/PokemonWiki" className="go-to-game">
-                        See Pokemon List
+                        See Pokémon List
                     </Link>
 
                     {/* Button to start the game */}
@@ -154,17 +157,20 @@ const WhosThatPokemon = () => {
                 <div>
                     {/* Buttons to select Pokemon generations */}
                     <div className="generation-buttons">
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((generation) => (
+                        {Object.keys(generation_dict).map((generation) => (
                             <button
                                 key={generation}
                                 className={
-                                    generation === activeGeneration
+                                    parseInt(generation) === activeGeneration
                                         ? 'active'
                                         : ''
                                 }
-                                onClick={() => fetchPokemonList(generation)}
+                                onClick={() =>
+                                    fetchPokemonList(parseInt(generation))
+                                }
                             >
-                                Generation {generation}
+                                Gen {generation}:{' '}
+                                {generation_dict[generation].name}
                             </button>
                         ))}
                     </div>
@@ -186,16 +192,18 @@ const WhosThatPokemon = () => {
                                 className="background-image"
                             />
 
-                            {/* Mystery Pokemon image */}
-                            <img
-                                src={mysteryPokemonSrc}
-                                alt="mystery-pokemon"
-                                className={
-                                    start
-                                        ? 'mystery-pokemon-image active'
-                                        : 'mystery-pokemon-image'
-                                }
-                            />
+                            {/* Mystery Pokemon image - only show if game has started */}
+                            {mysteryPokemonSrc && (
+                                <img
+                                    src={mysteryPokemonSrc}
+                                    alt="Mystery Pokémon"
+                                    className={
+                                        start
+                                            ? 'mystery-pokemon-image active'
+                                            : 'mystery-pokemon-image'
+                                    }
+                                />
+                            )}
 
                             {/* Button to start the game */}
                             <button
@@ -210,18 +218,20 @@ const WhosThatPokemon = () => {
                             </button>
                         </div>
 
-                        {/* Answer choices */}
-                        <div className="choices">
-                            {answerChoices.map((pokemonName) => (
-                                <button
-                                    className="pokemon-name"
-                                    key={pokemonName}
-                                    onClick={() => checkAnswer(pokemonName)}
-                                >
-                                    {pokemonName}
-                                </button>
-                            ))}
-                        </div>
+                        {/* Answer choices - only show if game has started */}
+                        {start && (
+                            <div className="choices">
+                                {answerChoices.map((pokemonName) => (
+                                    <button
+                                        className="pokemon-name"
+                                        key={pokemonName}
+                                        onClick={() => checkAnswer(pokemonName)}
+                                    >
+                                        {pokemonName}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Overlay for correct/incorrect answer feedback */}
                         <div className="overlay"></div>
@@ -234,7 +244,7 @@ const WhosThatPokemon = () => {
                                 </h3>
                                 <img
                                     src={mysteryPokemonSrc}
-                                    alt="mystery-pokemon"
+                                    alt="Mystery Pokémon"
                                     className={'mystery-pokemon-image shown'}
                                 />
                             </div>
@@ -245,7 +255,7 @@ const WhosThatPokemon = () => {
                                 </h3>
                                 <img
                                     src={mysteryPokemonSrc}
-                                    alt="mystery-pokemon"
+                                    alt="Mystery Pokémon"
                                     className={'mystery-pokemon-image shown'}
                                 />
                             </div>
@@ -253,6 +263,25 @@ const WhosThatPokemon = () => {
                     </div>
                 </div>
             ) : null}
+
+            {playGame && (
+                <div className="api-attribution">
+                    <p>
+                        Pokémon data provided by{' '}
+                        <a
+                            href="https://pokeapi.co/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            PokéAPI
+                        </a>
+                    </p>
+                    <p>
+                        Pokémon and Pokémon character names are trademarks of
+                        Nintendo.
+                    </p>
+                </div>
+            )}
         </div>
     )
 }
