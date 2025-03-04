@@ -39,6 +39,7 @@ const SnakeGame = () => {
     const lastDirectionRef = useRef('RIGHT') // Reference to track the last direction
     const gameTimerRef = useRef(null) // Reference for game timer
     const gameStartTimeRef = useRef(null) // Reference to track game start time
+    const directionQueueRef = useRef([]) // Reference to store queued direction changes
 
     // Effect to initialize game board width and height
     useEffect(() => {
@@ -105,27 +106,49 @@ const SnakeGame = () => {
 
             if (isPaused || gameOver) return // Don't process movement keys if paused or game over
 
-            let newDirection = direction
+            let newDirection = null
 
             switch (event.key) {
                 case 'ArrowUp':
-                    if (direction !== 'DOWN') newDirection = 'UP'
+                    newDirection = 'UP'
                     break
                 case 'ArrowDown':
-                    if (direction !== 'UP') newDirection = 'DOWN'
+                    newDirection = 'DOWN'
                     break
                 case 'ArrowLeft':
-                    if (direction !== 'RIGHT') newDirection = 'LEFT'
+                    newDirection = 'LEFT'
                     break
                 case 'ArrowRight':
-                    if (direction !== 'LEFT') newDirection = 'RIGHT'
+                    newDirection = 'RIGHT'
                     break
                 default:
                     break
             }
 
-            if (newDirection !== direction) {
-                setDirection(newDirection)
+            // Only queue valid direction changes
+            if (newDirection) {
+                // Get the last direction in the queue, or the current direction if queue is empty
+                const lastDirection =
+                    directionQueueRef.current.length > 0
+                        ? directionQueueRef.current[
+                              directionQueueRef.current.length - 1
+                          ]
+                        : direction
+
+                // Check if the new direction is not opposite to the last direction
+                const isValidDirection =
+                    (newDirection === 'UP' && lastDirection !== 'DOWN') ||
+                    (newDirection === 'DOWN' && lastDirection !== 'UP') ||
+                    (newDirection === 'LEFT' && lastDirection !== 'RIGHT') ||
+                    (newDirection === 'RIGHT' && lastDirection !== 'LEFT')
+
+                // Only add to queue if it's a valid direction change
+                if (isValidDirection) {
+                    // Limit queue size to prevent memory issues
+                    if (directionQueueRef.current.length < 3) {
+                        directionQueueRef.current.push(newDirection)
+                    }
+                }
             }
         }
 
@@ -167,6 +190,7 @@ const SnakeGame = () => {
         generateFood(initialSnake)
         setDirection('RIGHT')
         lastDirectionRef.current = 'RIGHT'
+        directionQueueRef.current = [] // Clear the direction queue
         setScore(0)
         setGameOver(false)
         setIsPaused(false)
@@ -227,6 +251,12 @@ const SnakeGame = () => {
     // Function to move snake
     const moveSnake = () => {
         if (!gameOver && !isPaused) {
+            // Process the next direction from the queue
+            if (directionQueueRef.current.length > 0) {
+                const nextDirection = directionQueueRef.current.shift()
+                setDirection(nextDirection)
+            }
+
             const newSnake = [...snake] // Create copy of the current snake position
             const head = { ...newSnake[0] } // Get the current head of snake
 
@@ -247,14 +277,22 @@ const SnakeGame = () => {
                     break
             }
 
-            if (
-                head.x < 0 || // If head goes out of left boundary
-                head.x >= GRID_SIZE || // Or if head goes out of right boundary
-                head.y < 0 || // Or if head goes out of top boundary
-                head.y >= GRID_SIZE || // Or if head goes out of bottom boundary
-                checkCollision(head, newSnake) // Or if head collides with snake body
-            ) {
-                endGame() // End the game
+            // Wrap around logic - if snake goes out of bounds, wrap to the other side
+            if (head.x < 0) {
+                head.x = GRID_SIZE - 1 // Wrap to right edge
+            } else if (head.x >= GRID_SIZE) {
+                head.x = 0 // Wrap to left edge
+            }
+
+            if (head.y < 0) {
+                head.y = GRID_SIZE - 1 // Wrap to bottom edge
+            } else if (head.y >= GRID_SIZE) {
+                head.y = 0 // Wrap to top edge
+            }
+
+            // Only check for collision with snake body
+            if (checkCollision(head, newSnake)) {
+                endGame() // End the game only if snake collides with itself
                 return
             }
 
@@ -302,7 +340,7 @@ const SnakeGame = () => {
             <h3>Snake Game</h3>
             <div className="game-instructions">
                 Use arrow keys to move • Press P to pause/resume • Press R to
-                restart
+                restart • Snake can pass through walls
             </div>
 
             <div className="game-layout">
@@ -317,6 +355,7 @@ const SnakeGame = () => {
                         {gameOver && (
                             <div className="game-over">
                                 <h2>Game Over</h2>
+                                <p>Snake ate itself!</p>
                                 <div className="game-over-stats">
                                     <p>Final Score: {score}</p>
                                     <p>Snake Length: {snake.length}</p>
