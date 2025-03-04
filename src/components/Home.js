@@ -51,6 +51,13 @@ const Home = () => {
                     description: 'Pick colors from images or color wheel',
                     path: '/ColorPicker',
                     icon: '🎨'
+                },
+                {
+                    name: 'Unit Converter',
+                    description:
+                        'Convert between different units of measurement',
+                    path: '/UnitConverter',
+                    icon: '📊'
                 }
             ]
         },

@@ -12,6 +12,7 @@ import SnakeGame from './components/Apps/SnakeGame/SnakeGame'
 import QRCodeGenerator from './components/Apps/QRCodeGenerator/QRCodeGenerator'
 import AgeCalculator from './components/Apps/AgeCalculator/AgeCalculator'
 import ColorPicker from './components/Apps/ColorPicker/ColorPicker'
+import UnitConverter from './components/Apps/UnitConverter/UnitConverter'
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                     />
                     <Route path="/AgeCalculator" element={<AgeCalculator />} />
                     <Route path="/ColorPicker" element={<ColorPicker />} />
+                    <Route path="/UnitConverter" element={<UnitConverter />} />
                     {/* Add routes for other Apps here */}
                 </Routes>
             </div>

@@ -1,0 +1,189 @@
+.unit-converter-container {
+    padding: 1.5rem 1rem 2rem;
+    max-width: 1000px;
+}
+
+.category-card,
+.converter-card,
+.info-card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.category-card {
+    background-color: #f8f9fa;
+    border-bottom: 3px solid #3c5aa6; /* Pokemon blue */
+    margin-bottom: 1.5rem;
+}
+
+.category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.nav-pills .nav-link {
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #3c5aa6; /* Pokemon blue */
+    background-color: #b0adad;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border: 2px solid #3c5aa6; /* Pokemon blue */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #ffcb05; /* Pokemon yellow */
+    color: #3c5aa6; /* Pokemon blue */
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-pills .nav-link.active {
+    background-color: #3c5aa6; /* Pokemon blue */
+    color: #ffcb05; /* Pokemon yellow */
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(60, 90, 166, 0.4);
+    border: 2px solid #3c5aa6;
+    transform: translateY(-2px);
+}
+
+.converter-card {
+    margin-bottom: 1.5rem;
+    border-top: 3px solid #ffcb05; /* Pokemon yellow */
+}
+
+.swap-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0;
+    transition: transform 0.3s ease;
+    background-color: #ffcb05; /* Pokemon yellow */
+    color: #3c5aa6; /* Pokemon blue */
+    border-color: #ffcb05;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+.swap-btn:hover {
+    transform: rotate(180deg);
+    background-color: #3c5aa6; /* Pokemon blue */
+    color: #ffcb05; /* Pokemon yellow */
+    border-color: #3c5aa6;
+}
+
+.convert-btn {
+    min-width: 120px;
+    background-color: #ffcb05; /* Pokemon yellow */
+    border-color: #ffcb05;
+    color: #3c5aa6; /* Pokemon blue */
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.convert-btn:hover {
+    background-color: #3c5aa6; /* Pokemon blue */
+    border-color: #3c5aa6;
+    color: #ffcb05; /* Pokemon yellow */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3c5aa6; /* Pokemon blue */
+}
+
+.info-card h5 {
+    color: #3c5aa6; /* Pokemon blue */
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+/* Form controls with better contrast */
+.form-control,
+.form-select {
+    border-color: #3c5aa6; /* Pokemon blue */
+    color: #000000;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3c5aa6; /* Pokemon blue */
+    box-shadow: 0 0 0 0.25rem rgba(60, 90, 166, 0.25);
+}
+
+.input-group .btn {
+    background-color: #ffcb05; /* Pokemon yellow */
+    border-color: #ffcb05;
+    color: #3c5aa6; /* Pokemon blue */
+    font-weight: 600;
+}
+
+.input-group .btn:hover {
+    background-color: #3c5aa6; /* Pokemon blue */
+    border-color: #3c5aa6;
+    color: #ffcb05; /* Pokemon yellow */
+}
+
+.input-group .btn:disabled {
+    background-color: #e0e0e0;
+    border-color: #d0d0d0;
+    color: #6c757d;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .unit-converter-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .category-nav {
+        gap: 0.3rem;
+    }
+
+    .nav-pills .nav-link {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .swap-btn {
+        margin: 0.5rem 0;
+    }
+}
+
+.copy-btn {
+    background-color: #ffcb05; /* Pokemon yellow */
+    border-color: #ffcb05;
+    color: #3c5aa6; /* Pokemon blue */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover:not(:disabled) {
+    background-color: #3c5aa6; /* Pokemon blue */
+    border-color: #3c5aa6;
+    color: #ffcb05; /* Pokemon yellow */
+    transform: translateY(-2px);
+}
+
+.copy-btn:disabled {
+    background-color: #e0e0e0;
+    border-color: #d0d0d0;
+    color: #6c757d;
+    opacity: 0.65;
+}
