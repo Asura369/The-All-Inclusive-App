@@ -2,7 +2,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './WhosThatPokemon.css'
+// Background image based on the "Who's That Pokémon?" segment from the Pokémon anime
+// © Nintendo, Game Freak, and The Pokémon Company
 import BackgroundImage from './Background.webp'
+
+// Cache for storing API responses
+const apiCache = {}
 
 const WhosThatPokemon = () => {
     const [pokemonList, setPokemonList] = useState([]) // List of Pokemon for the current generation
@@ -37,15 +42,30 @@ const WhosThatPokemon = () => {
             generation_dict[generation].range[0]
         const offset_value = generation_dict[generation].range[0]
 
+        // Create a cache key for this specific request
+        const cacheKey = `pokemon_gen_${generation}`
+
         // Try fetching from the PokeAPI and storing the data
         try {
-            const response = await fetch(
-                `https://pokeapi.co/api/v2/pokemon?limit=${limit_value}&offset=${offset_value}`
-            )
-            const data = await response.json()
-            const data_list = data.results
-            setPokemonList(data_list)
-            setActiveGeneration(generation)
+            // Check if we have cached data for this generation
+            if (apiCache[cacheKey]) {
+                console.log('Using cached data for generation', generation)
+                setPokemonList(apiCache[cacheKey])
+                setActiveGeneration(generation)
+            } else {
+                // If not in cache, fetch from API
+                const response = await fetch(
+                    `https://pokeapi.co/api/v2/pokemon?limit=${limit_value}&offset=${offset_value}`
+                )
+                const data = await response.json()
+                const data_list = data.results
+
+                // Store in cache
+                apiCache[cacheKey] = data_list
+
+                setPokemonList(data_list)
+                setActiveGeneration(generation)
+            }
         } catch (error) {
             console.error('Error fetching Pokemon data:', error)
         }
@@ -85,9 +105,8 @@ const WhosThatPokemon = () => {
 
         let randomIndex = Math.floor(Math.random() * pokemonList.length)
         let randomPokemon = pokemonList[randomIndex]
-        const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonIdFromUrl(
-            randomPokemon.url
-        )}.png`
+        const pokemonId = getPokemonIdFromUrl(randomPokemon.url)
+        const mysteryPokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`
 
         const choiceList = [] // Array to store the mystery pokemon and three other random pokemon name
         choiceList.push(randomPokemon.name)
@@ -277,8 +296,20 @@ const WhosThatPokemon = () => {
                         </a>
                     </p>
                     <p>
+                        Pokémon images and artwork © Nintendo, Game Freak, and
+                        The Pokémon Company.
+                    </p>
+                    <p>
+                        "Who's That Pokémon?" format is based on the segment
+                        from the Pokémon anime series.
+                    </p>
+                    <p>
                         Pokémon and Pokémon character names are trademarks of
                         Nintendo.
+                    </p>
+                    <p className="small">
+                        This is an unofficial, fan-made application for
+                        educational purposes only.
                     </p>
                 </div>
             )}

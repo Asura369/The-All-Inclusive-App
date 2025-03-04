@@ -14,6 +14,9 @@ import {
 import { FaGamepad, FaSearch, FaInfoCircle } from 'react-icons/fa'
 import './PokemonWiki.css'
 
+// Cache for storing API responses
+const apiCache = {}
+
 const PokemonWiki = () => {
     const [pokemonList, setPokemonList] = useState([]) // Store the list of Pokemon
     const [activeGeneration, setActiveGeneration] = useState(null) // Store the active Pokemon generation
@@ -60,15 +63,31 @@ const PokemonWiki = () => {
                 generation_dict[generation].range[0]
         ]
 
+        // Create a cache key for this specific request
+        const cacheKey = `pokemon_gen_${generation}`
+
         try {
-            const response = await fetch(
-                `https://pokeapi.co/api/v2/pokemon?limit=${limit_value}&offset=${offset_value}`
-            )
-            const data = await response.json()
-            const data_list = data.results
-            setPokemonList(data_list)
-            setFilteredList(data_list)
-            setActiveGeneration(generation)
+            // Check if we have cached data for this generation
+            if (apiCache[cacheKey]) {
+                console.log('Using cached data for generation', generation)
+                setPokemonList(apiCache[cacheKey])
+                setFilteredList(apiCache[cacheKey])
+                setActiveGeneration(generation)
+            } else {
+                // If not in cache, fetch from API
+                const response = await fetch(
+                    `https://pokeapi.co/api/v2/pokemon?limit=${limit_value}&offset=${offset_value}`
+                )
+                const data = await response.json()
+                const data_list = data.results
+
+                // Store in cache
+                apiCache[cacheKey] = data_list
+
+                setPokemonList(data_list)
+                setFilteredList(data_list)
+                setActiveGeneration(generation)
+            }
         } catch (error) {
             console.error('Error fetching Pokemon data:', error)
         } finally {
@@ -252,8 +271,16 @@ const PokemonWiki = () => {
                     </a>
                 </p>
                 <p>
+                    Pokémon images and artwork © Nintendo, Game Freak, and The
+                    Pokémon Company.
+                </p>
+                <p>
                     Pokémon and Pokémon character names are trademarks of
                     Nintendo.
+                </p>
+                <p className="small">
+                    This is an unofficial, fan-made application for educational
+                    purposes only.
                 </p>
             </div>
         </Container>
