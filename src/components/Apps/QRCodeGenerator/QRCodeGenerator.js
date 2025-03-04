@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './QRCodeGenerator.css'
 import {
     Container,
@@ -438,11 +439,36 @@ const QRCodeGenerator = () => {
                                 onSelect={handleTabChange}
                                 className="mb-4"
                             >
-                                <Tab eventKey="url" title="URL" />
-                                <Tab eventKey="text" title="Text" />
-                                <Tab eventKey="wifi" title="WiFi" />
-                                <Tab eventKey="email" title="Email" />
-                                <Tab eventKey="phone" title="Phone" />
+                                <Tab
+                                    eventKey="url"
+                                    title={
+                                        <span className="tab-title">URL</span>
+                                    }
+                                />
+                                <Tab
+                                    eventKey="text"
+                                    title={
+                                        <span className="tab-title">Text</span>
+                                    }
+                                />
+                                <Tab
+                                    eventKey="wifi"
+                                    title={
+                                        <span className="tab-title">WiFi</span>
+                                    }
+                                />
+                                <Tab
+                                    eventKey="email"
+                                    title={
+                                        <span className="tab-title">Email</span>
+                                    }
+                                />
+                                <Tab
+                                    eventKey="phone"
+                                    title={
+                                        <span className="tab-title">Phone</span>
+                                    }
+                                />
                             </Tabs>
 
                             {renderTabContent()}
@@ -672,6 +698,22 @@ const QRCodeGenerator = () => {
                         characters for optimal scanning
                     </li>
                 </ul>
+
+                {/* Attribution section */}
+                <div className="mt-4 p-3 bg-light rounded">
+                    <h5>Attribution</h5>
+                    <p className="small text-muted mb-0">
+                        This QR code generator uses the{' '}
+                        <a
+                            href="https://github.com/zpao/qrcode.react"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            qrcode.react
+                        </a>{' '}
+                        library, which is licensed under the ISC License.
+                    </p>
+                </div>
             </div>
         </Container>
     )
