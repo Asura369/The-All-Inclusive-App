@@ -27,8 +27,6 @@ const SnakeGame = () => {
     const [food, setFood] = useState({}) // State for food position
     const [direction, setDirection] = useState('RIGHT') // State for snake direction
     const [gameOver, setGameOver] = useState(false) // State for gameover status
-    const [width, setWidth] = useState(GRID_SIZE * CELL_SIZE) // State for game board width
-    const [height, setHeight] = useState(GRID_SIZE * CELL_SIZE) // State for game board height
     const [isPaused, setIsPaused] = useState(false) // State for game pause status
     const [foodType, setFoodType] = useState(FOOD_TYPES.REGULAR) // State for current food type
     const [difficulty, setDifficulty] = useState(DIFFICULTY_LEVELS.MEDIUM) // State for difficulty level
@@ -40,16 +38,6 @@ const SnakeGame = () => {
     const gameTimerRef = useRef(null) // Reference for game timer
     const gameStartTimeRef = useRef(null) // Reference to track game start time
     const directionQueueRef = useRef([]) // Reference to store queued direction changes
-
-    // Effect to initialize game board width and height
-    useEffect(() => {
-        const gameBoard = gameBoardRef.current
-        if (gameBoard) {
-            // Use fixed size based on GRID_SIZE and CELL_SIZE
-            setWidth(GRID_SIZE * CELL_SIZE)
-            setHeight(GRID_SIZE * CELL_SIZE)
-        }
-    }, [])
 
     // Effect to move snake at set intervals based on difficulty
     useEffect(() => {
@@ -156,7 +144,7 @@ const SnakeGame = () => {
         return () => {
             document.removeEventListener('keydown', handleKeyPress) // Remove event listener on re-render
         }
-    }, [direction, isPaused, gameOver])
+    }, [direction, isPaused, gameOver]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Effect to initialize the game
     useEffect(() => {
@@ -171,7 +159,7 @@ const SnakeGame = () => {
         return () => {
             clearInterval(gameTimerRef.current)
         }
-    }, []) // eslint-disable-line
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Function to format time
     const formatTime = (seconds) => {
