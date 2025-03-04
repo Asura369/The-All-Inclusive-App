@@ -1,0 +1,229 @@
+.age-calculator-container {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Results section styling */
+.results-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.result-card,
+.birthday-card {
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.result-card:hover,
+.birthday-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: 600;
+}
+
+/* Age display styling */
+.age-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.age-years,
+.age-months,
+.age-days {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0d6efd;
+    min-width: 3rem;
+    text-align: center;
+}
+
+.age-label {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-right: 1.5rem;
+}
+
+.age-label:last-child {
+    margin-right: 0;
+}
+
+/* Fractional age styling */
+.fractional-age {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.fractional-age h6 {
+    margin-bottom: 0.75rem;
+    color: #495057;
+}
+
+.fractional-display {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6610f2;
+    font-family: monospace;
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Age details styling */
+.age-details .list-group-item {
+    padding: 0.75rem 1.25rem;
+    transition: background-color 0.2s;
+}
+
+.age-details .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Birthday card styling */
+.birthday-card {
+    margin-top: 1.5rem;
+}
+
+.birthday-number {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.birthday-number span {
+    font-weight: 700;
+    color: #0d6efd;
+    font-size: 1.5rem;
+}
+
+.birthday-date {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.countdown-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #198754;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Info section styling */
+.info-section {
+    color: #495057;
+}
+
+.info-section h4 {
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.info-section h5 {
+    margin-bottom: 1rem;
+    color: #343a40;
+}
+
+.info-section ul {
+    padding-left: 1.25rem;
+}
+
+.info-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .age-years,
+    .age-months,
+    .age-days {
+        font-size: 2rem;
+    }
+
+    .countdown-number {
+        font-size: 2rem;
+    }
+
+    .age-display {
+        padding: 1rem;
+    }
+
+    .fractional-display {
+        font-size: 1.5rem;
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .age-display {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .age-years,
+    .age-months,
+    .age-days {
+        min-width: auto;
+    }
+
+    .age-label {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .age-label:last-child {
+        margin-bottom: 0;
+    }
+
+    .fractional-display {
+        font-size: 1.25rem;
+        min-width: 120px;
+    }
+}

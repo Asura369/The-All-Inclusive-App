@@ -42,6 +42,12 @@ const Home = () => {
                         </Link>
                     </li>
                     <li className="app-list-item">
+                        <Link to="/AgeCalculator" className="card-link">
+                            <h3>Age Calculator</h3>
+                            <p>Calculate your exact age and next birthday</p>
+                        </Link>
+                    </li>
+                    <li className="app-list-item">
                         <Link
                             to="https://calendar-app-nu-self.vercel.app/"
                             className="card-link"

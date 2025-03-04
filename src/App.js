@@ -10,6 +10,7 @@ import PokemonWiki from './components/Apps/Pokemon/PokemonWiki'
 import WhosThatPokemon from './components/Apps/Pokemon/WhosThatPokemon'
 import SnakeGame from './components/Apps/SnakeGame/SnakeGame'
 import QRCodeGenerator from './components/Apps/QRCodeGenerator/QRCodeGenerator'
+import AgeCalculator from './components/Apps/AgeCalculator/AgeCalculator'
 import LoginPage from './components/LoginPage'
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                         path="/QRCodeGenerator"
                         element={<QRCodeGenerator />}
                     />
+                    <Route path="/AgeCalculator" element={<AgeCalculator />} />
                     {/* Add routes for other Apps here */}
                 </Routes>
             </div>
