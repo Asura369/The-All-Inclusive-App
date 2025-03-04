@@ -1,55 +1,217 @@
 /* src/components/Home.css */
-.home-container {
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #f8f9fa;
+    --accent-color: #ff6b6b;
+    --text-color: #333;
+    --light-text: #6c757d;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+.home-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #4a6bff 0%, #6b8cff 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    animation: fadeInUp 1.2s ease;
 }
 
-.home-container p {
-    margin: 10px;
+/* Main Content */
+.main-content {
+    padding: 20px 0 60px;
 }
 
-.app-list {
-    list-style: none;
-    padding: 0;
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: #3a5bef;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(74, 107, 255, 0.3);
+}
+
+/* App Categories */
+.app-category {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: var(--text-color);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* App Cards */
+.app-card {
     display: flex;
-    flex-wrap: wrap;
-}
-
-.app-list-item {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    width: calc(
-        33.333% - 10px
-    ); /* Calculate width for three items in a row with margin */
-    transition: transform 0.3s ease;
-}
-
-.app-list-item:hover {
-    transform: scale(1.05);
-}
-
-@media (max-width: 900px) {
-    .app-list-item {
-        width: calc(50% - 10px); /* Adjusted width for two items in a row */
-    }
-}
-
-@media (max-width: 480px) {
-    .app-list-item {
-        width: calc(100% - 10px); /* Adjusted width for one items in a row */
-    }
-}
-
-.card-link {
-    display: block;
-    padding: 15px;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
-.card-link:hover {
-    background-color: #f4f4f4;
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.app-card:hover .app-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.app-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    background-color: var(--secondary-color);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.app-info {
+    flex: 1;
+}
+
+.app-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.app-info p {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.app-arrow {
+    position: absolute;
+    right: 20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--transition);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Footer */
+.home-footer {
+    background-color: #343a40;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .app-card {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 40px 0;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .category-title {
+        font-size: 1.5rem;
+    }
 }

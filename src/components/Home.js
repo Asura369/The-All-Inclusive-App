@@ -1,64 +1,138 @@
 // src/components/Home.js
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Home.css'
 
 const Home = () => {
+    // Define app categories
+    const appCategories = [
+        {
+            title: 'Games',
+            apps: [
+                {
+                    name: 'Snake',
+                    description: 'Classic snake game with modern features',
+                    path: '/Snake',
+                    icon: '🐍'
+                },
+                {
+                    name: "Who's That Pokemon",
+                    description: 'Test your Pokemon knowledge',
+                    path: '/WhosThatPokemon',
+                    icon: '❓'
+                }
+            ]
+        },
+        {
+            title: 'Utilities',
+            apps: [
+                {
+                    name: 'Password Generator',
+                    description: 'Create strong and secure passwords',
+                    path: '/PasswordGenerator',
+                    icon: '🔒'
+                },
+                {
+                    name: 'QR Code Generator',
+                    description: 'Create and download custom QR codes',
+                    path: '/QRCodeGenerator',
+                    icon: '📱'
+                },
+                {
+                    name: 'Age Calculator',
+                    description: 'Calculate your exact age and next birthday',
+                    path: '/AgeCalculator',
+                    icon: '📅'
+                }
+            ]
+        },
+        {
+            title: 'Information',
+            apps: [
+                {
+                    name: 'Pokemon Wiki',
+                    description: 'Explore Pokemon from each generation',
+                    path: '/PokemonWiki',
+                    icon: '📚'
+                },
+                {
+                    name: 'To-Do Calendar',
+                    description: 'Manage your tasks and schedule',
+                    path: 'https://calendar-app-nu-self.vercel.app/',
+                    icon: '📆',
+                    external: true
+                }
+            ]
+        }
+    ]
+
     return (
-        <div className="home-container">
-            <h1>Welcome to The All Inclusive App</h1>
-            <p>Explore various apps below:</p>
-            <nav>
-                <ul className="app-list">
-                    <li className="app-list-item">
-                        <Link to="/PasswordGenerator" className="card-link">
-                            <h3>Password Generator</h3>
-                            <p>Generate strong and secure passwords</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link to="/PokemonWiki" className="card-link">
-                            <h3>Pokemon Wiki</h3>
-                            <p>See Pokemon from each Generation</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link to="/WhosThatPokemon" className="card-link">
-                            <h3>Whos That Pokemon</h3>
-                            <p>Whos That Pokemon Game</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link to="/Snake" className="card-link">
-                            <h3>Snake</h3>
-                            <p>Play the Snake game</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link to="/QRCodeGenerator" className="card-link">
-                            <h3>QR Code Generator</h3>
-                            <p>Create and download custom QR codes</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link to="/AgeCalculator" className="card-link">
-                            <h3>Age Calculator</h3>
-                            <p>Calculate your exact age and next birthday</p>
-                        </Link>
-                    </li>
-                    <li className="app-list-item">
-                        <Link
-                            to="https://calendar-app-nu-self.vercel.app/"
-                            className="card-link"
-                        >
-                            <h3>To-Do Calendar</h3>
-                            <p>A Calendar with To-Do feature</p>
-                        </Link>
-                    </li>
-                    {/* Add more Apps as needed */}
-                </ul>
-            </nav>
+        <div className="home-page">
+            {/* Hero Section */}
+            <div className="hero-section">
+                <Container>
+                    <h1 className="hero-title">The All-Inclusive App</h1>
+                    <p className="hero-subtitle">
+                        Your one-stop collection of useful tools and fun games
+                    </p>
+                </Container>
+            </div>
+
+            {/* Main Content */}
+            <Container className="main-content">
+                {/* App Categories */}
+                {appCategories.map((category, index) => (
+                    <div key={index} className="app-category">
+                        <h2 className="category-title">{category.title}</h2>
+                        <Row>
+                            {category.apps.map((app, appIndex) => (
+                                <Col
+                                    key={appIndex}
+                                    lg={4}
+                                    md={6}
+                                    sm={12}
+                                    className="mb-4"
+                                >
+                                    <Link
+                                        to={app.path}
+                                        className="app-card"
+                                        target={
+                                            app.external ? '_blank' : '_self'
+                                        }
+                                        rel={
+                                            app.external
+                                                ? 'noopener noreferrer'
+                                                : ''
+                                        }
+                                    >
+                                        <div className="app-icon">
+                                            {app.icon}
+                                        </div>
+                                        <div className="app-info">
+                                            <h3>{app.name}</h3>
+                                            <p>{app.description}</p>
+                                        </div>
+                                        <div className="app-arrow">→</div>
+                                    </Link>
+                                </Col>
+                            ))}
+                        </Row>
+                    </div>
+                ))}
+            </Container>
+
+            {/* Footer */}
+            <footer className="home-footer">
+                <Container>
+                    <p>
+                        © 2023-2025 The All-Inclusive App. All rights reserved.
+                        All apps are designed for educational and entertainment
+                        purposes.
+                    </p>
+                </Container>
+            </footer>
         </div>
     )
 }
