@@ -131,6 +131,25 @@ const Home = () => {
                         All apps are designed for educational and entertainment
                         purposes.
                     </p>
+                    <p className="small text-muted mt-2">
+                        Built with{' '}
+                        <a
+                            href="https://react-bootstrap.github.io/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            React Bootstrap
+                        </a>{' '}
+                        and{' '}
+                        <a
+                            href="https://react-icons.github.io/react-icons/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            React Icons
+                        </a>
+                        .
+                    </p>
                 </Container>
             </footer>
         </div>

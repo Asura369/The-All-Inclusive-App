@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
@@ -11,21 +11,14 @@ import WhosThatPokemon from './components/Apps/Pokemon/WhosThatPokemon'
 import SnakeGame from './components/Apps/SnakeGame/SnakeGame'
 import QRCodeGenerator from './components/Apps/QRCodeGenerator/QRCodeGenerator'
 import AgeCalculator from './components/Apps/AgeCalculator/AgeCalculator'
-import LoginPage from './components/LoginPage'
 
 function App() {
-    const [user, setUser] = useState({})
-
     return (
         <Router>
             <div>
-                <TopNavigationBar user={user} />
+                <TopNavigationBar />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route
-                        path="/LoginPage"
-                        element={<LoginPage setUser={setUser} />}
-                    />
                     <Route
                         path="/PasswordGenerator"
                         element={<PasswordGenerator />}
