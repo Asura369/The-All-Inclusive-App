@@ -11,6 +11,7 @@ import WhosThatPokemon from './components/Apps/Pokemon/WhosThatPokemon'
 import SnakeGame from './components/Apps/SnakeGame/SnakeGame'
 import QRCodeGenerator from './components/Apps/QRCodeGenerator/QRCodeGenerator'
 import AgeCalculator from './components/Apps/AgeCalculator/AgeCalculator'
+import ColorPicker from './components/Apps/ColorPicker/ColorPicker'
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                         element={<QRCodeGenerator />}
                     />
                     <Route path="/AgeCalculator" element={<AgeCalculator />} />
+                    <Route path="/ColorPicker" element={<ColorPicker />} />
                     {/* Add routes for other Apps here */}
                 </Routes>
             </div>

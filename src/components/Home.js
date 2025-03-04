@@ -45,6 +45,12 @@ const Home = () => {
                     description: 'Calculate your exact age and next birthday',
                     path: '/AgeCalculator',
                     icon: '📅'
+                },
+                {
+                    name: 'Color Picker',
+                    description: 'Pick colors from images or color wheel',
+                    path: '/ColorPicker',
+                    icon: '🎨'
                 }
             ]
         },
