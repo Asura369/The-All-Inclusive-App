@@ -1,0 +1,95 @@
+.data-generator {
+    min-height: calc(100vh - 56px);
+    padding-bottom: 2rem;
+}
+
+.list-output {
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    min-height: 300px;
+    max-height: 600px;
+    overflow-y: auto;
+    font-family: monospace;
+}
+
+.list-item {
+    padding: 4px 8px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.list-item:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.list-item-string {
+    border-left: 3px solid #0d6efd;
+}
+
+.list-item-integer {
+    border-left: 3px solid #198754;
+}
+
+.list-item-float {
+    border-left: 3px solid #0dcaf0;
+}
+
+.list-item-boolean {
+    border-left: 3px solid #ffc107;
+}
+
+.list-item-date {
+    border-left: 3px solid #dc3545;
+}
+
+.item-value {
+    flex-grow: 1;
+    word-break: break-all;
+}
+
+.item-type-badge {
+    font-size: 0.7rem;
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.data-summary {
+    margin-bottom: 10px;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 0;
+}
+
+/* Custom scrollbar */
+.list-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-output::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.list-output::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.list-output::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .list-output {
+        max-height: 400px;
+    }
+}

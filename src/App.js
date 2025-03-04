@@ -13,6 +13,7 @@ import QRCodeGenerator from './components/Apps/QRCodeGenerator/QRCodeGenerator'
 import AgeCalculator from './components/Apps/AgeCalculator/AgeCalculator'
 import ColorPicker from './components/Apps/ColorPicker/ColorPicker'
 import UnitConverter from './components/Apps/UnitConverter/UnitConverter'
+import DataGenerator from './components/Apps/DataGenerator/DataGenerator'
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/AgeCalculator" element={<AgeCalculator />} />
                     <Route path="/ColorPicker" element={<ColorPicker />} />
                     <Route path="/UnitConverter" element={<UnitConverter />} />
+                    <Route path="/DataGenerator" element={<DataGenerator />} />
                     {/* Add routes for other Apps here */}
                 </Routes>
             </div>

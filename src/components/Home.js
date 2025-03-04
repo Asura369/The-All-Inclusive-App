@@ -58,6 +58,13 @@ const Home = () => {
                         'Convert between different units of measurement',
                     path: '/UnitConverter',
                     icon: '📊'
+                },
+                {
+                    name: 'Data Generator',
+                    description:
+                        'Generate and mix various types of random data',
+                    path: '/DataGenerator',
+                    icon: '📋'
                 }
             ]
         },
