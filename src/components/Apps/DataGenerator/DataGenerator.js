@@ -7,8 +7,7 @@ import {
     Col,
     Card,
     Alert,
-    Badge,
-    ListGroup
+    Badge
 } from 'react-bootstrap'
 import { FaCopy, FaDownload, FaTrash } from 'react-icons/fa'
 import { FaPlus, FaShuffle } from 'react-icons/fa6'
