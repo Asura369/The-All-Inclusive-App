@@ -1,10 +1,27 @@
-An react app that includes many small apps within.
+# The All-Inclusive App
 
-Live website at: [the-all-inclusive-app.vercel.app/](https://the-all-inclusive-app.vercel.app/)
+A React application that includes multiple mini-apps in one place, providing a collection of useful tools and fun games.
 
-#
+## Live Website
 
-Runs the app in the development mode with `npm start`.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Visit the live application at: [the-all-inclusive-app.vercel.app/](https://the-all-inclusive-app.vercel.app/)
 
-The page will reload when you make changes. You may also see any lint errors in the console.
+## Development
+
+### Prerequisites
+
+-   Node.js and npm
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies with `npm install`
+
+### Running Locally
+
+-   Run the app in development mode with `npm start`
+-   Open [http://localhost:3000](http://localhost:3000) to view it in your browser
+
+### Building for Production
+
+-   Create a production build with `npm run build`
