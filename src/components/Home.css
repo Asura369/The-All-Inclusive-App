@@ -152,6 +152,64 @@
     color: var(--primary-color);
 }
 
+/* Privacy Section */
+.privacy-section {
+    background-color: #f0f4ff;
+    padding: 60px 0;
+    margin-top: 20px;
+}
+
+.privacy-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.privacy-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.privacy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.privacy-card h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.privacy-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
+
+.privacy-card p {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.privacy-card strong {
+    color: #333;
+}
+
 /* Footer */
 .home-footer {
     background-color: #343a40;
@@ -195,6 +253,14 @@
 
     .app-card {
         margin-bottom: 15px;
+    }
+
+    .privacy-section {
+        padding: 40px 0;
+    }
+
+    .privacy-content {
+        grid-template-columns: 1fr;
     }
 }
 

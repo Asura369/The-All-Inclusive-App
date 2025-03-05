@@ -143,6 +143,72 @@ const Home = () => {
                 ))}
             </Container>
 
+            {/* Privacy Notice and Disclaimers */}
+            <div className="privacy-section">
+                <Container>
+                    <h2 className="text-center mb-4">
+                        Privacy Notice & Disclaimers
+                    </h2>
+                    <div className="privacy-content">
+                        <div className="privacy-card mb-4">
+                            <h3>Data Privacy</h3>
+                            <p>
+                                <strong>No Data Storage:</strong> The
+                                All-Inclusive App is a purely frontend
+                                application. We do not collect, store, or
+                                process any personal information on our servers.
+                            </p>
+                            <p>
+                                <strong>Local Processing:</strong> All
+                                operations are performed locally in your
+                                browser. Any data you enter remains on your
+                                device and is never transmitted to external
+                                servers.
+                            </p>
+                        </div>
+
+                        <div className="privacy-card mb-4">
+                            <h3>Usage Disclaimers</h3>
+                            <p>
+                                <strong>Educational Purpose:</strong> This
+                                application is designed for educational and
+                                entertainment purposes only.
+                            </p>
+                            <p>
+                                <strong>No Guarantees:</strong> While we strive
+                                for accuracy, we cannot guarantee the precision
+                                of all tools and calculations. Do not rely on
+                                this application for critical or professional
+                                decisions.
+                            </p>
+                            <p>
+                                <strong>Third-Party Content:</strong> Some
+                                applications may access public APIs or display
+                                third-party content. We are not responsible for
+                                the accuracy or availability of such content.
+                            </p>
+                        </div>
+
+                        <div className="privacy-card">
+                            <h3>Security Notice</h3>
+                            <p>
+                                <strong>Browser Storage:</strong> Some
+                                applications may use browser storage mechanisms
+                                (localStorage or sessionStorage) to enhance your
+                                experience. This data remains on your device and
+                                is not accessible to us.
+                            </p>
+                            <p>
+                                <strong>External Links:</strong> This
+                                application may contain links to external
+                                websites. We are not responsible for the privacy
+                                practices or content of these external sites.
+                            </p>
+                        </div>
+                    </div>
+                </Container>
+            </div>
+
             {/* Footer */}
             <footer className="home-footer">
                 <Container>
