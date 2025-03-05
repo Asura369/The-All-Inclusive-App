@@ -22,6 +22,12 @@ const Home = () => {
                     description: 'Test your Pokemon knowledge',
                     path: '/WhosThatPokemon',
                     icon: '❓'
+                },
+                {
+                    name: 'Tic Tac Toe',
+                    description: 'Classic game of X and O',
+                    path: '/TicTacToe',
+                    icon: '🎮'
                 }
             ]
         },
